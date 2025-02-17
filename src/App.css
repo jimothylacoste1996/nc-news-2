@@ -1,12 +1,12 @@
 #root {
-  max-width: 1280px;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
   text-align: center;
 }
 
 .logo {
-  height: 6em;
+  height: 4em;
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
@@ -34,9 +34,126 @@
 }
 
 .card {
-  padding: 2em;
+  padding: 1em;
 }
 
 .read-the-docs {
   color: #888;
+}
+
+#logo {
+  width: 304px;
+  height: auto;
+}
+
+button {
+  width: 100%;
+  padding: 5%;
+  margin: 1rem;
+  text-align: center;
+  line-height: 50px;
+  justify-content: center;
+  border-radius: 15%;
+  border-width: 5px;
+  border-color: rgb(107, 107, 107);
+  border-style: solid;
+  background-size: cover;
+  background-color: rgb(229, 231, 216);
+  font-size: 3rem;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+
+  overflow: visible;
+}
+
+.NavBar {
+  display: flex;
+  flex-flow: wrap;
+  gap: 100px;
+  justify-content: center;
+  background-color: rgb(204, 3, 3);
+  padding: 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  z-index: 1000;
+}
+
+.article-card {
+  position: relative;
+  border: 2px solid grey;
+  border-radius: 10px;
+  margin: 20px;
+  padding: 20px;
+  font-size: 1rem;
+}
+
+.article-card img {
+  width: 75%;
+  height: auto;
+}
+
+.articles-container {
+  padding-top: 200px;
+}
+
+#view-article {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 200px;
+  height: 100px;
+  border: none;
+  font-size: 2rem;
+  padding: 0;
+}
+
+@media screen and (max-width: 768px) {
+  #root {
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  #logo {
+    width: 75px;
+    height: auto;
+  }
+
+  .NavBar {
+    flex-direction: column;
+    gap: 1px;
+    padding: 5px;
+    text-align: center;
+    height: 10%;
+  }
+
+  .article-card {
+    margin: 5px;
+    padding: 8px;
+    font-size: 0.8rem;
+  }
+
+  .article-card img {
+    max-height: 150px;
+  }
+
+  .articles-container {
+    padding-top: 80px;
+  }
+
+  button {
+    width: 75%;
+    padding: 3%;
+    font-size: 0.5rem;
+    height: auto;
+  }
+
+  #view-article {
+    width: 100px;
+    height: 50px;
+    font-size: 1rem;
+  }
 }
