@@ -69,11 +69,92 @@ button:active {
   background-color: #fff;
   border: 2px solid grey;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   margin: 10px;
+}
+
+.individual-article-card {
+  padding-top: 20px;
+  position: relative;
+  width: 80%;
+  background-color: #fff;
+  border: 2px solid grey;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  align-items: center;
+  margin: 10px;
+  margin-top: 200px;
+}
+
+.individual-article-card .body-text {
+  font-size: 1.125rem;
+  color: #333;
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+#upvote {
+  display: flex;
+  bottom: 50px;
+  right: 50px;
+  width: 200px;
+  height: 100px;
+  padding: 5px;
+  font-size: 5rem;
+  background-color: rgb(204, 204, 204);
+  border: 1px solid grey;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+}
+
+#upvote:active {
+  color: rgb(204, 3, 3);
+}
+
+#downvote {
+  display: flex;
+  bottom: 50px;
+  left: 50px;
+  width: 200px;
+  height: 100px;
+  padding: 5px;
+  font-size: 5rem;
+  background-color: rgb(204, 204, 204);
+  border: 1px solid grey;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+}
+
+#downvote:active {
+  color: rgb(204, 3, 3);
+}
+
+#votes-container {
+  position: absolute;
+  bottom: 130px;
+  left: 250px;
+  padding: 10px 20px;
+  background-color: rgb(204, 3, 3);
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.article-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #view-article {
@@ -92,4 +173,27 @@ button:active {
   align-items: center;
   text-align: center;
   cursor: pointer;
+}
+
+#view-comments {
+  display: flex;
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+  width: 500px;
+  height: 100px;
+  padding: 80px;
+  font-size: 3rem;
+  background-color: rgb(204, 204, 204);
+  border: 1px solid grey;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+}
+
+#temp {
+  background-color: #444;
+  margin: 200px;
 }
