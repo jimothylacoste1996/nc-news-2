@@ -8,7 +8,6 @@ export default function Articles() {
 
   useEffect(() => {
     getArticles().then((data) => {
-      console.log(data);
       setArticlesData(data);
     });
   }, []);
