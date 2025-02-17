@@ -16,7 +16,7 @@ export default function ArticleCard({ article }) {
       <button
         id="view-article"
         value={article.article_id}
-        onClick={handleArticleButtonClick({ article })}
+        onClick={handleArticleButtonClick}
       >
         {" "}
         View Article
