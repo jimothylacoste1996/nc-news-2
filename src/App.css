@@ -1,0 +1,95 @@
+#root {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.NavBar {
+  display: flex;
+  flex-flow: wrap;
+  gap: 100px;
+  justify-content: center;
+  background-color: rgb(204, 3, 3);
+  padding: 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  z-index: 1000;
+}
+
+button {
+  width: 100%;
+  padding: 7%;
+  margin: 1rem;
+  text-align: center;
+  line-height: 50px;
+  justify-content: center;
+  border-radius: 15%;
+  border-width: 5px;
+  border-color: rgb(87, 88, 79);
+  border-style: solid;
+  background-size: cover;
+  background-color: rgb(229, 231, 216);
+  font-size: 3rem;
+  cursor: pointer;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+
+  overflow: visible;
+}
+
+button:hover {
+  background-color: #ccc;
+  border-color: #444;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+#logo {
+  width: 300px;
+  height: auto;
+}
+
+.articles-container {
+  margin-top: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding-top: 120px;
+  gap: 20px;
+}
+.article-card {
+  position: relative;
+  width: 80%;
+  background-color: #fff;
+  border: 2px solid grey;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin: 10px;
+}
+
+#view-article {
+  display: flex;
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+  width: 200px;
+  height: 100px;
+  padding: 5px;
+  font-size: 2rem;
+  background-color: bisque;
+  border: 1px solid grey;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+}
