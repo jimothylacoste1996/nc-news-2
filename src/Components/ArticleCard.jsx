@@ -1,5 +1,9 @@
 import "../App.css";
 
+const handleArticleButtonClick = ({ article }) => {
+  console.log(article.value);
+};
+
 export default function ArticleCard({ article }) {
   return (
     <div className="article-card">
@@ -9,7 +13,14 @@ export default function ArticleCard({ article }) {
       <p>Topic: {article.topic}</p>
       <p>Votes: {article.votes}</p>
       <p>Comments: {article.comment_count}</p>
-      <button id="view-article"> View Article</button>
+      <button
+        id="view-article"
+        value={article.article_id}
+        onClick={handleArticleButtonClick({ article })}
+      >
+        {" "}
+        View Article
+      </button>
     </div>
   );
 }
