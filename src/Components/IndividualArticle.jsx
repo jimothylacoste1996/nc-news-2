@@ -10,7 +10,6 @@ export default function IndividualArticle({ params }) {
 
   useEffect(() => {
     getArticleById(article_id).then((article) => {
-      console.log(article);
       setArticle(article);
       setIsLoading(false);
     });

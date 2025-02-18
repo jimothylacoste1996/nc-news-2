@@ -7,6 +7,7 @@ export default function LoginButton(props) {
     <div>
       <button
         type="button"
+        id="my-custom-btn"
         className={props.instructions}
         onClick={handleLoginClick}
       >
