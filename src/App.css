@@ -137,6 +137,24 @@ button:active {
   cursor: pointer;
 }
 
+#undo-article-vote-button{
+  display: flex;
+  position: absolute;
+  bottom: 50px;
+  right: -50px;
+  width: 50px;
+  height: 5px;
+  padding: 21px;
+  font-size: 1rem;
+  background-color: rgb(204, 204, 204);
+  border: 1px solid grey;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+}
+
 #upvote:active {
   color: rgb(204, 3, 3);
 }
