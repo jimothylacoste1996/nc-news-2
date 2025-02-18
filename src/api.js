@@ -21,3 +21,31 @@ export const getCommentsById = (article_id) => {
     return res.data.comments;
   });
 };
+
+export const incrementArticleVote = (article_id) => {
+  console.log("clicked", article_id);
+
+  return newsApi
+    .patch(`articles/${article_id}`, {
+      inc_votes: 1,
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const decrementArticleVote = (article_id) => {
+  return newsApi
+    .patch(`articles/${article_id}`, {
+      inc_votes: -1,
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};

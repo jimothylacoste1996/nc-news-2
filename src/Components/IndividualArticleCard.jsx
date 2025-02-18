@@ -1,11 +1,19 @@
 import { useState } from "react";
-import { getCommentsById } from "../api";
+import {
+  getCommentsById,
+  incrementArticleVote,
+  decrementArticleVote,
+} from "../api";
 import CommentCard from "./CommentCard";
 
 export default function IndividualArticleCard({ article }) {
   const [commentsList, setCommentsList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [showComments, setShowComments] = useState(false);
+  const [voteClicked, setVoteClicked] = useState(false);
+  const [articleVotes, setArticleVotes] = useState(article.votes);
+  const [vote, setVote] = useState(null);
+  const [error, setError] = useState(null);
 
   const commentClickHandler = (article_id) => {
     if (!showComments) {
@@ -20,8 +28,45 @@ export default function IndividualArticleCard({ article }) {
   };
 
   const closeCommentHandler = () => {
-    console.log("clicked");
     setShowComments(false);
+  };
+
+  const voteClickHandler = (direction) => {
+    if (voteClicked) {
+      return;
+    }
+    setVoteClicked(true);
+    if (direction === "upvote") {
+      setArticleVotes(articleVotes + 1);
+      setError(null);
+      incrementArticleVote(article.article_id).catch((err) => {
+        setArticleVotes(articleVotes - 1);
+        setError("Your vote was not successful. Please try again!");
+      });
+      setVote("upvote");
+    } else if (direction === "downvote") {
+      setArticleVotes(articleVotes - 1);
+      setError(null);
+      decrementArticleVote(article.article_id).catch((err) => {
+        setArticleVotes(articleVotes + 1);
+        setError("Your vote was not successful. Please try again!");
+      });
+      setVote("downvote");
+    }
+  };
+
+  const undoVoteClickHandler = (vote) => {
+    if (vote === "upvote") {
+      decrementArticleVote(article.article_id);
+      setArticleVotes(articleVotes - 1);
+      console.log("1");
+      setVoteClicked(false);
+    } else if (vote === "downvote") {
+      incrementArticleVote(article.article_id);
+      setArticleVotes(articleVotes + 1);
+      console.log("2");
+      setVoteClicked(false);
+    }
   };
 
   return (
@@ -34,9 +79,35 @@ export default function IndividualArticleCard({ article }) {
 
       <p>Comments: {article.comment_count}</p>
       <div className="votes-container">
-        <button id="upvote">↑</button>
-        <button id="downvote">↓</button>
-        <div id="votes-counter">{article.votes}</div>
+        <button
+          id="upvote"
+          onClick={() => {
+            voteClickHandler("upvote");
+          }}
+          disabled={voteClicked}
+        >
+          ↑
+        </button>
+        {error ? <p>{error}</p> : null}
+        <button
+          id="downvote"
+          onClick={() => {
+            voteClickHandler("downvote");
+          }}
+          disabled={voteClicked}
+        >
+          ↓
+        </button>
+        {error ? <p>{error}</p> : null}
+        <div id="votes-counter">{articleVotes}</div>
+        {voteClicked && (
+          <button
+            id="undo-article-vote-button"
+            onClick={() => undoVoteClickHandler(vote)}
+          >
+            Undo vote
+          </button>
+        )}
       </div>
 
       {!showComments && (
