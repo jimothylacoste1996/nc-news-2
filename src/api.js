@@ -23,8 +23,6 @@ export const getCommentsById = (article_id) => {
 };
 
 export const incrementArticleVote = (article_id) => {
-  console.log("clicked", article_id);
-
   return newsApi
     .patch(`articles/${article_id}`, {
       inc_votes: 1,
@@ -44,6 +42,19 @@ export const decrementArticleVote = (article_id) => {
     })
     .then((res) => {
       console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const postCommentToDatebase = (article_id, commentData) => {
+  console.log(commentData);
+  return newsApi
+    .post(`articles/${article_id}/comments`, commentData)
+    .then((res) => {
+      console.log("successful");
+      return res;
     })
     .catch((err) => {
       console.log(err);

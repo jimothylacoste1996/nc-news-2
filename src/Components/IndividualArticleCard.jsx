@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import {
   getCommentsById,
   incrementArticleVote,
   decrementArticleVote,
 } from "../api";
 import CommentCard from "./CommentCard";
+import PostComment from "./PostComment";
 
 export default function IndividualArticleCard({ article }) {
   const [commentsList, setCommentsList] = useState([]);
@@ -14,17 +15,36 @@ export default function IndividualArticleCard({ article }) {
   const [articleVotes, setArticleVotes] = useState(article.votes);
   const [vote, setVote] = useState(null);
   const [error, setError] = useState(null);
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
 
-  const commentClickHandler = (article_id) => {
-    if (!showComments) {
+  // const commentClickHandler = (article_id) => {
+  //   if (!showComments) {
+  //     setIsLoading(true);
+  //     getCommentsById(article_id).then((comments) => {
+  //       setCommentsList(comments);
+  //       setIsLoading(false);
+  //     });
+  //   }
+  //   setShowComments(!showComments);
+  // };
+
+  useEffect(() => {
+    if (showComments) {
       setIsLoading(true);
-      getCommentsById(article_id).then((comments) => {
-        console.log(comments);
+      getCommentsById(article.article_id).then((comments) => {
         setCommentsList(comments);
         setIsLoading(false);
       });
     }
-    setShowComments(!showComments);
+  }, [showComments, refreshTrigger]);
+
+  const commentClickHandler = (article_id) => {
+    setIsLoading(true);
+    getCommentsById(article_id).then((comments) => {
+      setCommentsList(comments);
+      setIsLoading(false);
+      setShowComments(true);
+    });
   };
 
   const closeCommentHandler = () => {
@@ -59,12 +79,10 @@ export default function IndividualArticleCard({ article }) {
     if (vote === "upvote") {
       decrementArticleVote(article.article_id);
       setArticleVotes(articleVotes - 1);
-      console.log("1");
       setVoteClicked(false);
     } else if (vote === "downvote") {
       incrementArticleVote(article.article_id);
       setArticleVotes(articleVotes + 1);
-      console.log("2");
       setVoteClicked(false);
     }
   };
@@ -119,14 +137,21 @@ export default function IndividualArticleCard({ article }) {
         </button>
       )}
       {showComments && (
-        <button
-          id="close-comments"
-          onClick={() => {
-            closeCommentHandler();
-          }}
-        >
-          Close Comments
-        </button>
+        <>
+          <PostComment
+            article={article}
+            setRefreshTrigger={setRefreshTrigger}
+          />
+
+          <button
+            id="close-comments"
+            onClick={() => {
+              closeCommentHandler();
+            }}
+          >
+            Close Comments
+          </button>
+        </>
       )}
 
       {isLoading && <p>Loading comments...</p>}
@@ -153,9 +178,3 @@ export default function IndividualArticleCard({ article }) {
     </div>
   );
 }
-/* <button
-        id="view-comments"
-        onClick={() => commentClickHandler(article.article_id)}
-      >
-        Click to view comments
-      </button> */
