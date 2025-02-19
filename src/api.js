@@ -40,23 +40,26 @@ export const decrementArticleVote = (article_id) => {
     .patch(`articles/${article_id}`, {
       inc_votes: -1,
     })
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    .then((res) => {})
+    .catch((err) => {});
 };
 
 export const postCommentToDatebase = (article_id, commentData) => {
-  console.log(commentData);
   return newsApi
     .post(`articles/${article_id}/comments`, commentData)
     .then((res) => {
-      console.log("successful");
       return res;
     })
-    .catch((err) => {
-      console.log(err);
+    .catch((err) => {});
+};
+
+export const getUsers = () => {
+  return newsApi.get("/users").then((res) => {
+    const usersData = res.data.users;
+    const userNames = usersData.map((user) => {
+      return user.username;
     });
+
+    return userNames;
+  });
 };
