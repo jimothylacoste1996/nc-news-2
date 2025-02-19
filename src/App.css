@@ -357,6 +357,7 @@ button:active {
   background-color: rgb(204, 3, 3);
   color: white;
   gap: 10px;
+  border-radius: 15%;
 }
 
 #username-input{
@@ -378,7 +379,16 @@ button:active {
   width: 100%;
   align-items: center;
   justify-content: center;
- 
-  
 
 }
+
+#logged-in-text{
+  color: rgb(233, 233, 233);
+  font-size: 1.25rem;
+}
+
+#logout-button{
+  border-radius: 15%;
+  padding: 5%;
+}
+
