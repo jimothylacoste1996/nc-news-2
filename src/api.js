@@ -84,3 +84,11 @@ export const getTopics = () => {
     return topicsArray;
   });
 };
+
+export const getOrderedArticles = (sortBy = "date", order = "desc") => {
+  return newsApi
+    .get(`/articles?sort_by=${sortBy}&order=${order}`)
+    .then((res) => {
+      return res.data.articles;
+    });
+};

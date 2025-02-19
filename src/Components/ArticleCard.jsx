@@ -7,7 +7,7 @@ const handleArticleButtonClick = (article) => {
   return article;
 };
 
-export default function ArticleCard({ article, setRefreshArticles }) {
+export default function ArticleCard({ article }) {
   const formattedDate = moment(article.created_at).format(
     "MMMM Do YYYY, h:mm:ss a"
   );
