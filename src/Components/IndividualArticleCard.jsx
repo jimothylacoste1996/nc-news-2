@@ -1,4 +1,5 @@
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+
 import {
   getCommentsById,
   incrementArticleVote,
@@ -16,17 +17,6 @@ export default function IndividualArticleCard({ article }) {
   const [vote, setVote] = useState(null);
   const [error, setError] = useState(null);
   const [refreshTrigger, setRefreshTrigger] = useState(0);
-
-  // const commentClickHandler = (article_id) => {
-  //   if (!showComments) {
-  //     setIsLoading(true);
-  //     getCommentsById(article_id).then((comments) => {
-  //       setCommentsList(comments);
-  //       setIsLoading(false);
-  //     });
-  //   }
-  //   setShowComments(!showComments);
-  // };
 
   useEffect(() => {
     if (showComments) {
@@ -164,10 +154,15 @@ export default function IndividualArticleCard({ article }) {
               ) : (
                 commentsList.map((comment) => {
                   return (
-                    <CommentCard
-                      key={comment.comment_id}
-                      comment={comment}
-                    ></CommentCard>
+                    <div>
+                      <>
+                        <CommentCard
+                          key={comment.comment_id}
+                          comment={comment}
+                          setRefreshTrigger={setRefreshTrigger}
+                        ></CommentCard>
+                      </>
+                    </div>
                   );
                 })
               )}

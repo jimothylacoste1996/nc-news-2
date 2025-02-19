@@ -63,3 +63,7 @@ export const getUsers = () => {
     return userNames;
   });
 };
+
+export const deleteComment = (comment_id) => {
+  return newsApi.delete(`/comments/${comment_id}`);
+};
