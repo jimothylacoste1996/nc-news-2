@@ -16,6 +16,12 @@ export const getArticleById = (article_id) => {
   });
 };
 
+export const getArticleByTopic = (topic) => {
+  return newsApi.get(`/articles/?topic=${topic}`).then((res) => {
+    return res.data.articles;
+  });
+};
+
 export const getCommentsById = (article_id) => {
   return newsApi.get(`/articles/${article_id}/comments`).then((res) => {
     return res.data.comments;
@@ -66,4 +72,15 @@ export const getUsers = () => {
 
 export const deleteComment = (comment_id) => {
   return newsApi.delete(`/comments/${comment_id}`);
+};
+
+export const getTopics = () => {
+  return newsApi.get("/topics").then((res) => {
+    const topicsData = res.data.topics;
+    const topicsArray = topicsData.map((topic) => {
+      return topic.slug;
+    });
+
+    return topicsArray;
+  });
 };

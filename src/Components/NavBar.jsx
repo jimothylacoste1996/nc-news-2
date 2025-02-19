@@ -8,9 +8,6 @@ export default function NavBar() {
   return (
     <section className="NavBar">
       <img src={logo} id="logo" alt="Northcoders news logo"></img>
-      {/* <Link to="/">
-        <NavButton instructions="home">Home</NavButton>
-      </Link> */}
 
       <Link to="/topics">
         <NavButton instructions="topics">Topics</NavButton>

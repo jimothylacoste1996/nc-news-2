@@ -77,15 +77,42 @@ button:active {
 }
 
 .articles-container {
-  margin-top: 100px;
+  margin-top: 150px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding-top: 120px;
-  gap: 20px;
+  
+  gap: 10px;
 }
+
+  #topic-header-container {
+ 
+    margin-top: 200px;
+    text-align: center;
+    border-radius: 8px; 
+  }
+
+  
+  
+  #topic-header {
+    margin: 0;
+    font-size: 3rem; 
+    font-weight: 600; 
+    color: #333; 
+    text-transform: capitalize; 
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", 
+      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+   
+  }
+
+  #topic-articles-container {
+   
+    padding-top: 10px; 
+    gap: 10px;
+  }
+
 .article-card {
   position: relative;
   width: 80%;
@@ -407,3 +434,33 @@ button:active {
   padding: 5%;
   width: 200px;
 }
+
+.topics-container{
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  gap: 50px;
+  padding-top: 200px;
+}
+
+.topic-button{
+  width: 100%;
+  padding: 7%;
+  margin: 1rem;
+  text-align: center;
+  line-height: 50px;
+  justify-content: center;
+  border-radius: 15%;
+  border-width: 5px;
+  border-color: rgb(87, 88, 79);
+  border-style: solid;
+  background-size: cover;
+  background-color: rgb(229, 231, 216);
+  font-size: 2rem;
+  cursor: pointer;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+
+  overflow: visible;
+}
+

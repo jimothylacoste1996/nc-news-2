@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 
 const handleArticleButtonClick = (article) => {
+  setRefreshArticles((prev) => prev + 1);
   return article;
 };
 
-export default function ArticleCard({ article }) {
+export default function ArticleCard({ article, setRefreshArticles }) {
   const formattedDate = moment(article.created_at).format(
     "MMMM Do YYYY, h:mm:ss a"
   );
@@ -19,7 +20,7 @@ export default function ArticleCard({ article }) {
       <p>Votes: {article.votes}</p>
       <p>Comments: {article.comment_count}</p>
       <p>Posted: {formattedDate} </p>
-      <Link to={`/articles/${article.article_id}`}>
+      <Link to={`/articles/focus/${article.article_id}`}>
         <button
           id="view-article"
           value={article.article_id}
