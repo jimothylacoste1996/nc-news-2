@@ -1,3 +1,5 @@
+
+
 #root {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
@@ -83,9 +85,20 @@ button:active {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  
   gap: 10px;
 }
+.articles-container-topic {
+
+  margin-top: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  gap: 10px;
+}
+
+
 
   #topic-header-container {
  
@@ -93,6 +106,7 @@ button:active {
     text-align: center;
     border-radius: 8px; 
   }
+
 
   
   
@@ -107,15 +121,15 @@ button:active {
    
   }
 
-  #topic-articles-container {
+  /* #topic-articles-container {
    
     padding-top: 10px; 
     gap: 10px;
-  }
+  } */
 
 .article-card {
   position: relative;
-  width: 80%;
+  width: 60%;
   background-color: #fff;
   border: 2px solid grey;
   border-radius: 10px;
@@ -463,4 +477,20 @@ button:active {
 
   overflow: visible;
 }
+
+.sort-bar{
+  display: flex;
+position: absolute;
+  top: 0;
+  right:100px;
+  padding-top: 200px;
+}
+
+#sort-button{
+  width: 120px;
+}
+
+
+
+
 
