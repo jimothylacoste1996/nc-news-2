@@ -3,21 +3,47 @@ import LoginButton from "./Login-Button";
 import { Link } from "react-router";
 import "../App.css";
 import logo from "../assets/images/nc-news-logo.png";
+import { Box, Button } from "@mui/material";
+import HomeIcon from "@mui/icons-material/Home";
+import PersonIcon from "@mui/icons-material/Person";
+import TopicIcon from "@mui/icons-material/Topic";
 
 export default function NavBar() {
   return (
-    <section className="NavBar">
-      <img src={logo} id="logo" alt="Northcoders news logo"></img>
-
+    <Box
+      sx={{
+        position: "fixed",
+        bottom: 0,
+        left: 0,
+        width: "100%",
+        maxWidth: "100vw",
+        overflowX: "hidden",
+        backgroundColor: "rgb(204, 3, 3)",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        paddingX: { xs: "8px", sm: "16px", md: "24px" },
+        paddingY: "12px",
+        zIndex: 1000,
+        gap: { xs: "10px", sm: "20px", md: "40px" },
+      }}
+    >
       <Link to="/topics">
-        <NavButton instructions="topics">Topics</NavButton>
+        <NavButton instructions="topics">
+          <TopicIcon sx={{ marginRight: 1 }} /> Topics
+        </NavButton>
       </Link>
 
       <Link to="/articles">
-        <NavButton instructions="articles">Articles</NavButton>
+        <NavButton instructions="articles">
+          <HomeIcon sx={{ marginRight: 1 }} /> Home
+        </NavButton>
       </Link>
 
-      <LoginButton instructions="login">Login</LoginButton>
-    </section>
+      <LoginButton instructions="login">
+        <PersonIcon sx={{ marginRight: 1 }} />
+        Login
+      </LoginButton>
+    </Box>
   );
 }

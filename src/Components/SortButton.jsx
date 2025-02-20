@@ -1,10 +1,32 @@
 import { use, useState } from "react";
+import {
+  Button,
+  Box,
+  Menu,
+  MenuItem,
+  ToggleButton,
+  ToggleButtonGroup,
+} from "@mui/material";
+
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
 import { getOrderedArticles } from "../api";
 
 export default function SortButton({ setArticlesData }) {
   const [selectedSort, setSelectedSort] = useState(null);
   const [isAscending, setIsAscending] = useState("false");
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setMenuOpen(true);
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setMenuOpen(false);
+    setAnchorEl(null);
+  };
 
   const fetchSortedArticles = (sortBy, order) => {
     getOrderedArticles(sortBy, order).then((articles) => {
@@ -16,6 +38,7 @@ export default function SortButton({ setArticlesData }) {
     setSelectedSort(sortBy);
 
     fetchSortedArticles(sortBy, isAscending ? "asc" : "desc");
+    handleClose();
   };
 
   const toggleSort = () => {
@@ -26,35 +49,52 @@ export default function SortButton({ setArticlesData }) {
 
   return (
     <>
-      <div className="dropdown">
-        <button
-          id="sort-button"
-          type="button"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-          className="btn btn-secondary dropdown-toggle"
-        >
-          {selectedSort ? selectedSort : "Sort by"}
-        </button>
-
-        <ul className="dropdown-menu">
-          <li key="votes" onClick={() => handleSortClick("votes")}>
-            <a className="dropdown-item">Votes</a>
-          </li>
-          <li key="date" onClick={() => handleSortClick("created_at")}>
-            <a className="dropdown-item">Date</a>
-          </li>
-        </ul>
-      </div>
-      <button
-        className="btn btn-secondary "
-        onClick={() => {
-          toggleSort();
-          fetchSortedArticles;
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          textAlign: "center",
+          gap: 2,
         }}
       >
-        {isAscending ? "Ascending" : "Descending"}
-      </button>
+        <Button
+          variant="contained"
+          onClick={handleClick}
+          sx={{ backgroundColor: "rgb(204, 3, 3)" }}
+        >
+          {selectedSort ? `Sorting by ${selectedSort}` : "Sort by"}
+        </Button>
+        <Menu anchorEl={anchorEl} open={menuOpen} onClose={handleClose}>
+          <MenuItem
+            onClick={() => {
+              handleSortClick("votes");
+            }}
+          >
+            votes
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              handleSortClick("created_at");
+            }}
+          >
+            created_at
+          </MenuItem>
+        </Menu>
+        <ToggleButtonGroup>
+          <Button
+            variant="contained"
+            value="asc"
+            sx={{ backgroundColor: "rgb(204, 3, 3)" }}
+            onClick={() => {
+              toggleSort(true);
+              fetchSortedArticles;
+            }}
+          >
+            {isAscending ? "asc" : `desc`}
+          </Button>
+        </ToggleButtonGroup>
+      </Box>
     </>
   );
 }

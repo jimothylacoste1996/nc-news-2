@@ -1,14 +1,12 @@
 import { getArticleByTopic, getArticles } from "../api";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import SortBar from "./SortBar";
 
 import ArticlesContainer from "./ArticlesContainer";
 
 export default function Articles() {
   const { topic } = useParams();
   const [articlesData, setArticlesData] = useState([]);
-  const [refreshArticles, setRefreshArticles] = useState(0);
 
   useEffect(() => {
     if (topic) {
@@ -20,7 +18,7 @@ export default function Articles() {
         setArticlesData(data);
       });
     }
-  }, [topic, refreshArticles]);
+  }, [topic]);
 
   return (
     <>
@@ -33,7 +31,6 @@ export default function Articles() {
             <ArticlesContainer
               articles={articlesData}
               setArticlesData={setArticlesData}
-              setRefreshArticles={setRefreshArticles}
               className="articles-container-topic"
             />
           </div>
@@ -42,7 +39,6 @@ export default function Articles() {
         <ArticlesContainer
           articles={articlesData}
           setArticlesData={setArticlesData}
-          setRefreshArticles={setRefreshArticles}
         />
       )}
     </>

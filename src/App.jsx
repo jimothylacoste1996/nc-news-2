@@ -3,6 +3,7 @@ import Articles from "./Components/Articles";
 import { Route, Routes } from "react-router-dom";
 import Header from "./Components/Header";
 import Topics from "./Components/Topics";
+import NavBar from "./Components/NavBar";
 
 import IndividualArticle from "./Components/IndividualArticle";
 
