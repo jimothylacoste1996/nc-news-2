@@ -7,6 +7,7 @@ import {
 } from "../api";
 import CommentCard from "./CommentCard";
 import PostComment from "./PostComment";
+import { Button, Typography, Card, CardContent, Box } from "@mui/material";
 
 export default function IndividualArticleCard({ article }) {
   const [commentsList, setCommentsList] = useState([]);
@@ -78,98 +79,149 @@ export default function IndividualArticleCard({ article }) {
   };
 
   return (
-    <div className="individual-article-card">
-      <h2>{article.title}</h2>
-      <img src={article.article_img_url}></img>
-      <p>Author: {article.author}</p>
-      <p>Topic: {article.topic}</p>
-      <p className="body-text">{article.body}</p>
-
-      <p>Comments: {article.comment_count}</p>
-      <div className="votes-container">
-        <button
-          id="upvote"
-          onClick={() => {
-            voteClickHandler("upvote");
+    <Card
+      sx={{
+        maxWidth: 800,
+        margin: "0 auto",
+        padding: 2,
+        paddingTop: "20px",
+      }}
+    >
+      <CardContent sx={{ marginBottom: 3, padding: 2 }}>
+        <Typography variant="h4">{article.title}</Typography>
+        <img
+          src={article.article_img_url}
+          alt="article-img"
+          style={{
+            width: "100%",
+            marginTop: 16,
+            maxHeight: "300px",
+            objectFit: "cover",
           }}
-          disabled={voteClicked}
-        >
-          ↑
-        </button>
-        {error ? <p>{error}</p> : null}
-        <button
-          id="downvote"
-          onClick={() => {
-            voteClickHandler("downvote");
-          }}
-          disabled={voteClicked}
-        >
-          ↓
-        </button>
-        {error ? <p>{error}</p> : null}
-        <div id="votes-counter">{articleVotes}</div>
-        {voteClicked && (
-          <button
-            id="undo-article-vote-button"
-            onClick={() => undoVoteClickHandler(vote)}
-          >
-            Undo vote
-          </button>
-        )}
-      </div>
+        />
+        <Typography variant="body1" mb={1}>
+          Author: {article.author}
+        </Typography>
+        <Typography variant="body1" mb={1}>
+          Topic: {article.topic}
+        </Typography>
+        <Typography variant="body2" mb={1}>
+          {article.body}
+        </Typography>
 
-      {!showComments && (
-        <button
-          id="view-comments"
-          onClick={() => commentClickHandler(article.article_id)}
-        >
-          Click to view comments
-        </button>
-      )}
-      {showComments && (
-        <>
-          <PostComment
-            article={article}
-            setRefreshTrigger={setRefreshTrigger}
-          />
+        <Typography variant="body1" mb={1}>
+          Comments: {article.comment_count}
+        </Typography>
 
-          <button
-            id="close-comments"
-            onClick={() => {
-              closeCommentHandler();
+        <Box
+          className="votes-container"
+          sx={{ display: "flex", alignItems: "center", gap: 1.5 }}
+        >
+          <Button
+            variant="contained"
+            onClick={() => voteClickHandler("upvote")}
+            disabled={voteClicked}
+            sx={{
+              minWidth: "50px",
+              minHeight: "50px",
+              borderRadius: "15%",
+              backgroundColor: "rgb(204, 3, 3)",
             }}
           >
-            Close Comments
-          </button>
-        </>
-      )}
+            ↑
+          </Button>
+          {error && <Typography color="error">{error}</Typography>}
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => voteClickHandler("downvote")}
+            disabled={voteClicked}
+            sx={{
+              minWidth: "50px",
+              minHeight: "50px",
+              borderRadius: "15%",
+              backgroundColor: "rgb(204, 3, 3)",
+            }}
+          >
+            ↓
+          </Button>
 
-      {isLoading && <p>Loading comments...</p>}
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "8px 16px",
+              borderRadius: "8px",
+              backgroundColor: "#6B7280",
+              color: "white",
+              fontWeight: "bold",
+              minWidth: "50px",
+              textAlign: "center",
+            }}
+          >
+            {articleVotes}
+          </Box>
+
+          {voteClicked && (
+            <Button
+              variant="contained"
+              onClick={() => undoVoteClickHandler(vote)}
+              sx={{ marginTop: 1 }}
+            >
+              Undo vote
+            </Button>
+          )}
+        </Box>
+
+        {!showComments && (
+          <Button
+            variant="outlined"
+            sx={{
+              marginTop: 2,
+              color: "rgb(204, 3, 3)",
+              borderColor: "rgb(204, 3, 3)",
+            }}
+            onClick={() => commentClickHandler(article.article_id)}
+          >
+            Click to view comments
+          </Button>
+        )}
+
+        {showComments && (
+          <>
+            <PostComment
+              article={article}
+              setRefreshTrigger={setRefreshTrigger}
+            />
+            <Button
+              variant="contained"
+              sx={{ marginTop: 2, backgroundColor: "rgb(204, 3, 3)" }}
+              onClick={closeCommentHandler}
+            >
+              Close Comments
+            </Button>
+          </>
+        )}
+
+        {isLoading && <p>Loading..</p>}
+      </CardContent>
+
       {showComments && (
-        <>
-          <div className="comments-container">
-            <section>
-              {commentsList.length === 0 ? (
-                <p>No comments available.</p>
-              ) : (
-                commentsList.map((comment) => {
-                  return (
-                    <div>
-                      <>
-                        <CommentCard
-                          key={comment.comment_id}
-                          comment={comment}
-                          setRefreshTrigger={setRefreshTrigger}
-                        ></CommentCard>
-                      </>
-                    </div>
-                  );
-                })
-              )}
-            </section>
-          </div>
-        </>
+        <div className="comments-container" style={{ marginTop: 2 }}>
+          {commentsList.length === 0 ? (
+            <Typography>No comments available.</Typography>
+          ) : (
+            commentsList.map((comment) => (
+              <CommentCard
+                key={comment.comment_id}
+                comment={comment}
+                setRefreshTrigger={setRefreshTrigger}
+              />
+            ))
+          )}
+        </div>
       )}
-    </div>
+    </Card>
   );
 }
