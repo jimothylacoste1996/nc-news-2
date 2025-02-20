@@ -44,12 +44,6 @@ export default function SortButton({ setArticlesData }) {
           <li key="date" onClick={() => handleSortClick("created_at")}>
             <a className="dropdown-item">Date</a>
           </li>
-          <li
-            key="comment-count"
-            onClick={() => handleSortClick("comment_count")}
-          >
-            <a className="dropdown-item">Comment count</a>
-          </li>
         </ul>
       </div>
       <button
