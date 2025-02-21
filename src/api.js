@@ -86,7 +86,6 @@ export const getTopics = () => {
 };
 
 export const getOrderedArticles = (sortBy = "date", order = "desc") => {
-  console.log(order, sortBy);
   return newsApi
     .get(`/articles?sort_by=${sortBy}&order=${order}`)
     .then((res) => {
