@@ -22,7 +22,6 @@ export default function Articles() {
           setArticlesData(data);
         })
         .catch((err) => {
-          console.log("articles error");
           setError(err);
         });
     }

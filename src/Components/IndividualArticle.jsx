@@ -17,7 +17,6 @@ export default function IndividualArticle({ params }) {
         setIsLoading(false);
       })
       .catch((err) => {
-        console.log("IndividualArticle error");
         setError(err);
         setIsLoading(false);
       });
