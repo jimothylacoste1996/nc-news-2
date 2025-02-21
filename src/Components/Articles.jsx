@@ -83,7 +83,7 @@ export default function Articles() {
               display: "flex",
               justifyContent: "left",
               alignItems: "left",
-              width: "95%",
+              width: "100%",
               gap: 2,
               paddingBottom: "10px",
             }}

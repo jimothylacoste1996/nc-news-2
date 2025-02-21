@@ -15,7 +15,7 @@ export default function ArticlesContainer({
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          width: "95%",
+          width: "100%",
           gap: 2,
           paddingBottom: "150px",
         }}

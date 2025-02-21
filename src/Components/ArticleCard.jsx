@@ -55,7 +55,7 @@ export default function ArticleCard({ article }) {
             sx={{
               position: "absolute",
               bottom: "50px",
-              right: 0,
+              right: 20,
               padding: "5px",
               borderColor: "rgb(204, 3, 3)",
               color: "rgb(204, 3, 3)",
