@@ -1,4 +1,3 @@
-import "../App.css";
 import ArticleCard from "./ArticleCard";
 import SortBar from "./SortBar";
 import { Box } from "@mui/material";
