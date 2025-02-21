@@ -3,7 +3,7 @@ import { SearchDataContext } from "../Contexts/SearchData";
 import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import ArticlesContainer from "./ArticlesContainer";
-import { Box } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 
 import ErrorComponent from "./ErrorComponent";
 import SearchBar from "./SearchBar";
@@ -13,6 +13,7 @@ export default function Articles() {
   const [articlesData, setArticlesData] = useState([]);
   const [error, setError] = useState(null);
   const { searchData, setSearchData } = useContext(SearchDataContext);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (topic) {
@@ -29,6 +30,7 @@ export default function Articles() {
             filteredData = data;
           }
           setArticlesData(filteredData);
+          setIsLoading(false);
         })
         .catch((err) => {
           setError(err);
@@ -47,6 +49,7 @@ export default function Articles() {
             filteredData = data;
           }
           setArticlesData(filteredData);
+          setIsLoading(false);
         })
         .catch((err) => {
           setError(err);
@@ -60,6 +63,15 @@ export default function Articles() {
 
   return (
     <>
+      {isLoading && (
+        <>
+          <SearchBar setSearchData={setSearchData}></SearchBar>
+          <p>
+            Loading articles... <CircularProgress></CircularProgress>
+          </p>
+        </>
+      )}
+
       {topic ? (
         <>
           <SearchBar setSearchData={setSearchData}></SearchBar>
