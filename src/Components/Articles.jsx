@@ -3,10 +3,13 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import ArticlesContainer from "./ArticlesContainer";
+import ErrorPage from "./ErrorPage";
+import ErrorComponent from "./ErrorComponent";
 
 export default function Articles() {
   const { topic } = useParams();
   const [articlesData, setArticlesData] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (topic) {
@@ -14,11 +17,19 @@ export default function Articles() {
         setArticlesData(data);
       });
     } else {
-      getArticles().then((data) => {
-        setArticlesData(data);
-      });
+      getArticles()
+        .then((data) => {
+          setArticlesData(data);
+        })
+        .catch((err) => {
+          setError(err);
+        });
     }
   }, [topic]);
+
+  if (error) {
+    return <ErrorComponent message={error.message} />;
+  }
 
   return (
     <>

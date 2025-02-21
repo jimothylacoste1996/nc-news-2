@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import Header from "./Components/Header";
 import Topics from "./Components/Topics";
 import NavBar from "./Components/NavBar";
+import ErrorPage from "./Components/ErrorPage";
 
 import IndividualArticle from "./Components/IndividualArticle";
 
@@ -15,6 +16,7 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Articles />}></Route>
+          <Route path="*" element={<ErrorPage />} />
           <Route path="/articles" element={<Articles />}></Route>
           <Route path="/articles/:topic" element={<Articles />}></Route>
           <Route
