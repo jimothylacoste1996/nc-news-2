@@ -1,31 +1,58 @@
 import { getArticleByTopic, getArticles } from "../api";
-import { useEffect, useState } from "react";
+import { SearchDataContext } from "../Contexts/SearchData";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
-
 import ArticlesContainer from "./ArticlesContainer";
-import ErrorPage from "./ErrorPage";
+import { Box } from "@mui/material";
+
 import ErrorComponent from "./ErrorComponent";
+import SearchBar from "./SearchBar";
 
 export default function Articles() {
   const { topic } = useParams();
   const [articlesData, setArticlesData] = useState([]);
   const [error, setError] = useState(null);
+  const { searchData, setSearchData } = useContext(SearchDataContext);
 
   useEffect(() => {
     if (topic) {
-      getArticleByTopic(topic).then((data) => {
-        setArticlesData(data);
-      });
+      getArticleByTopic(topic)
+        .then((data) => {
+          let filteredData;
+          if (searchData) {
+            filteredData = data.filter((article) => {
+              return article.title
+                .toLowerCase()
+                .includes(searchData.toLowerCase());
+            });
+          } else {
+            filteredData = data;
+          }
+          setArticlesData(filteredData);
+        })
+        .catch((err) => {
+          setError(err);
+        });
     } else {
       getArticles()
         .then((data) => {
-          setArticlesData(data);
+          let filteredData;
+          if (searchData) {
+            filteredData = data.filter((article) => {
+              return article.title
+                .toLowerCase()
+                .includes(searchData.toLowerCase());
+            });
+          } else {
+            filteredData = data;
+          }
+          setArticlesData(filteredData);
         })
         .catch((err) => {
           setError(err);
         });
     }
-  }, [topic]);
+  }, [topic, searchData]);
 
   if (error) {
     return <ErrorComponent message={error.message} />;
@@ -35,6 +62,9 @@ export default function Articles() {
     <>
       {topic ? (
         <>
+          <SearchBar setSearchData={setSearchData}></SearchBar>
+
+          {articlesData.length === 0 && <p>no articles found</p>}
           <header id="topic-header-container">
             <h1 id="topic-header">{topic} articles</h1>
           </header>
@@ -47,10 +77,25 @@ export default function Articles() {
           </div>
         </>
       ) : (
-        <ArticlesContainer
-          articles={articlesData}
-          setArticlesData={setArticlesData}
-        />
+        <>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "left",
+              alignItems: "left",
+              width: "95%",
+              gap: 2,
+              paddingBottom: "10px",
+            }}
+          >
+            <SearchBar setSearchData={setSearchData}></SearchBar>
+          </Box>
+          {articlesData.length === 0 && <p>no articles found</p>}
+          <ArticlesContainer
+            articles={articlesData}
+            setArticlesData={setArticlesData}
+          />
+        </>
       )}
     </>
   );

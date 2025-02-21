@@ -1,14 +1,19 @@
 import NavButton from "./NavButton";
 import LoginButton from "./Login-Button";
 import { Link } from "react-router";
-import "../App.css";
-import logo from "../assets/images/nc-news-logo.png";
 import { Box, Button } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import PersonIcon from "@mui/icons-material/Person";
 import TopicIcon from "@mui/icons-material/Topic";
+import { SearchDataContext } from "../Contexts/SearchData";
+import { useContext } from "react";
 
 export default function NavBar() {
+  const { searchData, setSearchData } = useContext(SearchDataContext);
+
+  const handleResetSearch = () => {
+    setSearchData("");
+  };
   return (
     <Box
       sx={{
@@ -34,7 +39,7 @@ export default function NavBar() {
         </NavButton>
       </Link>
 
-      <Link to="/articles">
+      <Link to="/articles" onClick={handleResetSearch}>
         <NavButton instructions="articles">
           <HomeIcon sx={{ marginRight: 1 }} /> Home
         </NavButton>
