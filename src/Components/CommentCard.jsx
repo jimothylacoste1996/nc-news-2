@@ -87,28 +87,3 @@ export default function CommentCard({ comment, setRefreshTrigger }) {
     </Card>
   );
 }
-
-//   return (
-//     <div className="comment-card">
-//       <p id="comment-author"> Author: {comment.author} </p>
-//       <p> {comment.body} </p>
-//       <p>Posted at: {formattedDate}</p>
-
-//       <div className="comment-votes-container">
-//         <button id="comment-upvote">↑</button>
-//         <button id="comment-downvote">↓</button>
-//         <div id="votes-counter">{comment.votes}</div>
-//       </div>
-//       <div id="remove-comment-container">
-//         {loggedInUser === comment.author && (
-//           <button
-//             id="delete-comment-button"
-//             onClick={() => deleteClickHandler(comment.comment_id)}
-//           >
-//             Delete your comment
-//           </button>
-//         )}
-//       </div>
-//     </div>
-//   );
-// }

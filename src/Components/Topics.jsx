@@ -5,12 +5,21 @@ import { Typography } from "@mui/material";
 
 export default function Topics() {
   const [topicsData, setTopicsData] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    getTopics().then((topics) => {
-      setTopicsData(topics);
-    });
+    getTopics()
+      .then((topics) => {
+        setTopicsData(topics);
+      })
+      .catch((err) => {
+        setError(err);
+      });
   }, []);
+
+  if (error) {
+    return <ErrorComponent message={error.message} />;
+  }
 
   return (
     <>
