@@ -20,6 +20,12 @@ export default function ArticleCard({ article }) {
     "MMMM Do YYYY, h:mm:ss a"
   );
 
+  const titlesSplitArray = article.title.split(" ");
+
+  const reformattedTitle = titlesSplitArray.map((word) => {
+    return word.slice(0, 1).toUpperCase() + word.slice(1) + " ";
+  });
+
   return (
     <Card sx={{ position: "relative", width: "100%", maxWidth: 600 }}>
       <CardHeader
@@ -28,7 +34,7 @@ export default function ArticleCard({ article }) {
             {article.author}
           </Avatar>
         }
-        title={article.title}
+        title={reformattedTitle}
         subheader={formattedDate}
       />
       <CardMedia
@@ -39,7 +45,8 @@ export default function ArticleCard({ article }) {
       />
       <CardContent>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Topic: {article.topic}
+          Topic:{" "}
+          {article.topic.slice(0, 1).toUpperCase() + article.topic.slice(1)}
         </Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
           Comments: {article.comment_count}
@@ -54,7 +61,7 @@ export default function ArticleCard({ article }) {
             variant="outlined"
             sx={{
               position: "absolute",
-              bottom: "50px",
+              bottom: "45px",
               right: 20,
               padding: "5px",
               borderColor: "rgb(204, 3, 3)",
